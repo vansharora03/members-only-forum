@@ -5,6 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
+const messagesRouter = require('./routes/messages');
+const mongoose = require('mongoose');
+require('dotenv').config;
+
+// Connect to mongodb
+mongoose.connect(process.env.MONGODB);
 
 var app = express();
 
@@ -19,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/messages', messagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
