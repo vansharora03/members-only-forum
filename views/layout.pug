@@ -2,9 +2,13 @@ html
     head 
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title= title
+        style 
+            include ../styles/styles.css
     body 
         h1
             a(href="/") Home
         h1 
             a(href="/messages") Messages
+        h1 
+            a(href="/messages/sign-up") Sign Up
         block content
