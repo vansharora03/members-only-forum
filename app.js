@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 const messagesRouter = require('./routes/messages');
 const mongoose = require('mongoose');
-require('dotenv').config;
+require('dotenv').config();
 
 // Connect to mongodb
 mongoose.connect(process.env.MONGODB);
