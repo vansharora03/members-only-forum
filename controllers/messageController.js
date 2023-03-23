@@ -6,7 +6,7 @@ exports.messages_list = async (req, res, next) => {
     try {
         const messages = await Message.find().populate("author")
         // No errors, render the messages
-        res.render('messages', {title: "Messages", message_list: messages})
+        res.render('messages', {title: "Messages", message_list: messages, user: req.user})
     } catch (err) {
         console.log(err)
         next(err);

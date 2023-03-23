@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const {body, validationResult} = require('express-validator');
 const bcrypt = require("bcrypt");
+const passport = require('passport');
 
 exports.sign_up_GET = async (req, res, next) => {
     res.render('sign-up', {title: "Sign Up"});
@@ -72,7 +73,7 @@ exports.sign_up_POST = [
             usernameTakenError = new Error("Username is already in use. Please choose another.");
             usernameTakenError.msg = "Username is already in use. Please choose another.";
             errorsArray.push(usernameTakenError);
-            res.render("sign-up", {user: req.body, error_list: errorsArray});
+            res.render("sign-up", {title: 'Sign Up', user: req.body, error_list: errorsArray});
         }
         // Else save the user
 
@@ -93,3 +94,27 @@ exports.sign_up_POST = [
         res.redirect('/')
     }
 ]
+
+exports.log_in_GET = (req, res) => {
+    res.render('log-in', {title: 'Log In'});
+}
+
+// Post login form and log in user
+// authenticate using local strategy and on success redirect to home, else stay
+exports.log_in_POST = passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/users/log-in"
+});
+
+// Log users out
+exports.log_out_GET = (req, res, next) => {
+    // logout method of request
+    req.logout(err => {
+        if (err) {
+            // if error, send to error handler
+            return next(err);
+        }
+        // if success, redirect
+        res.redirect('/');
+    });
+}

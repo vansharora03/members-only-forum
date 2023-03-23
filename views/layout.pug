@@ -9,6 +9,12 @@ html
             a(href="/") Home
         h1 
             a(href="/messages") Messages
-        h1 
-            a(href="/users/sign-up") Sign Up
+        if !user
+            h1 
+                a(href="/users/sign-up") Sign Up
+            h1
+                a(href="/users/log-in") Log In
+        if user
+            h2 Signed in as #{user.username}
+            a(href="/users/log-out") Log Out 
         block content
