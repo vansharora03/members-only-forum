@@ -1,9 +1,12 @@
 extends layout 
 block content
-    ul 
-        each message in message_list 
-            li
-                h2= message.title
-                p= message.content
-                p= message.author.username
-                p= message.time_stamp
+    if message_list.length > 0
+        ul 
+            each message in message_list 
+                li
+                    h2= message.title
+                    p= message.content
+                    p= message.author.username
+                    p= message.time_stamp
+    else 
+        h2 No messages yet.
