@@ -13,6 +13,3 @@ exports.messages_list = async (req, res, next) => {
     }
 }
 
-exports.sign_up_GET = async (req, res, next) => {
-    res.render('sign-up', {title: "Sign Up"});
-}

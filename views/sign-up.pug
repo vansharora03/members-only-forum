@@ -1,14 +1,18 @@
 extends layout
-block content 
+block content
     form(action="" method="POST")
         label(for="first_name") First Name 
-        input(name="first_name" type="text")
-        label(for="last_name") Last Name
-        input(name="last_name" type="text")
+        input(name="first_name" type="text" value=(user ? user.first_name : ""))
+        label(for="last_name" ) Last Name
+        input(name="last_name"  type="text" value=(user ? user.last_name : ""))
         label(for="username") Username
-        input(name="username" type="email")
+        input(name="username" type="text" value=(user ? user.username : ""))
         label(for="password") Password
         input(name="password" type="password")
         label(for="confirm_password") Confirm Password
         input(name="confirm_password" type="password")
         button Submit
+    if error_list
+        ul 
+            each error in error_list 
+                li= error.msg
