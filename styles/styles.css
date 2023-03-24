@@ -1,3 +1,11 @@
 label,input {
     display: block;
 }
+
+.message-list {
+    transform: rotate(180deg);
+}
+
+.message-list>li {
+    transform: rotate(-180deg);
+}

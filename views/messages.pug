@@ -1,12 +1,24 @@
 extends layout 
 block content
+    if user
+        form(action="" method="POST")
+            label(for="title") Message Title
+            input(name="title" type="text" value=(message_title ? message_title : ""))
+            label(for="message") Message 
+            textarea(name="message" value=(attempt ? attempt : ""))
+            button Send
+    if error_list
+        ul
+            each error in error_list 
+                li= error.msg
     if message_list.length > 0
-        ul 
+        ul(class="message-list") 
             each message in message_list 
                 li
                     h2= message.title
                     p= message.content
-                    p= message.author.username
-                    p= message.time_stamp
+                    if currentUser.is_vip
+                        p= message.author.username
+                        p= message.time_stamp
     else 
         h2 No messages yet.

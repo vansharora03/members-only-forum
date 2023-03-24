@@ -64,6 +64,7 @@ exports.sign_up_POST = [
         if(!errors.isEmpty()) {
             // There are errors
             res.render("sign-up", {user: req.body, error_list: errors.array()});
+            return;
         }
         // There are no errors
         foundUser = await User.findOne({username: req.body.username})
@@ -74,6 +75,7 @@ exports.sign_up_POST = [
             usernameTakenError.msg = "Username is already in use. Please choose another.";
             errorsArray.push(usernameTakenError);
             res.render("sign-up", {title: 'Sign Up', user: req.body, error_list: errorsArray});
+            return;
         }
         // Else save the user
 

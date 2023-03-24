@@ -15,6 +15,6 @@ html
             h1
                 a(href="/users/log-in") Log In
         if user
-            h2 Signed in as #{user.username}
+            h2 Signed in as #{currentUser.username}
             a(href="/users/log-out") Log Out 
         block content
