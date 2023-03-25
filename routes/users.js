@@ -23,4 +23,10 @@ router.get('/member-key', userController.member_key_GET);
 /** POST Member-key form */
 router.post('/member-key', userController.member_key_POST);
 
+/** GET Admin-key form */
+router.get('/admin-key', userController.admin_key_GET);
+
+/** POST Admin-key form */
+router.post('/admin-key', userController.admin_key_POST);
+
 module.exports = router;

@@ -144,4 +144,26 @@ exports.member_key_POST = [
     }
 ]
 
+exports.admin_key_GET = (req, res, next) => {
+    res.render('admin-key', {title: 'Admin Key'});
+}
+
+exports.admin_key_POST = [
+    // Sanitize
+    body("admin_key")
+        .trim()
+        .escape(),
+    async (req, res, next) => {
+        // Check if passcode is correct
+        if (req.body.admin_key !== process.env.ADMIN_KEY) {
+            // Incorrect, rerender
+            res.render('admin-key', {title: 'Admin Key', incorrect: true});
+            return;
+        }
+        // Passcode is correct
+        await User.findOneAndUpdate({username: req.user.username}, {is_admin: true});
+        res.redirect("/");
+    }
+]
+
 

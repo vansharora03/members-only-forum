@@ -9,3 +9,10 @@ label,input {
 .message-list>li {
     transform: rotate(-180deg);
 }
+
+.navbar {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
