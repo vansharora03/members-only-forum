@@ -50,4 +50,14 @@ exports.messages_POST = [
 
 ]
 
+// Fix idk
+exports.message_delete_POST = async (req, res, next) => {
+    try {
+        await Message.findOneAndRemove({id: req.params.id})
+        res.redirect("/messages")
+    } catch (err) {
+        next(err);
+    }
+}
+
 
