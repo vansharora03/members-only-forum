@@ -17,8 +17,11 @@ block content
                 li
                     h2= message.title
                     p= message.content
-                    if currentUser.is_vip
+                    if currentUser && currentUser.is_vip
                         p= message.author.username
                         p= message.time_stamp
+                        if currentUser.is_admin
+                            form(action=("/messages/delete/" + message.id) method="POST")
+                                button Delete
     else 
         h2 No messages yet.

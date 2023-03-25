@@ -2,6 +2,7 @@ const User = require('../models/User');
 const {body, validationResult} = require('express-validator');
 const bcrypt = require("bcrypt");
 const passport = require('passport');
+require('dotenv').config();
 
 exports.sign_up_GET = async (req, res, next) => {
     res.render('sign-up', {title: "Sign Up"});
@@ -120,3 +121,27 @@ exports.log_out_GET = (req, res, next) => {
         res.redirect('/');
     });
 }
+
+exports.member_key_GET = (req, res, next) => {
+    res.render('member-key', {title: 'Member Key'});
+}
+
+exports.member_key_POST = [
+    // Sanitize
+    body("member_key")
+        .trim()
+        .escape(),
+    async (req, res, next) => {
+        // Check if passcode is correct
+        if (req.body.member_key !== process.env.MEMBER_KEY) {
+            // Incorrect, rerender
+            res.render('member-key', {title: 'Member Key', incorrect: true});
+            return;
+        }
+        // Passcode is correct
+        await User.findOneAndUpdate({username: req.user.username}, {is_vip: true})
+        res.redirect("/");
+    }
+]
+
+

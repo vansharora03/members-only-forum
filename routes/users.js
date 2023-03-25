@@ -17,4 +17,10 @@ router.post('/log-in', userController.log_in_POST);
 /** GET Log-out */
 router.get('/log-out', userController.log_out_GET);
 
+/** GET Member-key form */
+router.get('/member-key', userController.member_key_GET);
+
+/** POST Member-key form */
+router.post('/member-key', userController.member_key_POST);
+
 module.exports = router;
